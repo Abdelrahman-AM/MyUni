@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}{{ uni.name }} - MyUni{% endblock %}
+{% block meta_description %}Details and admission requirements for {{ uni.name }} in {{ uni.city }}.{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-12 col-lg-7">
+        <img src="{{ uni.display_image }}" alt="{{ uni.name }}" class="img-fluid rounded shadow-sm w-100" onerror="this.onerror=null;this.src='/static/images/default.svg'" />
+    </div>
+    <div class="col-12 col-lg-5">
+        <h1 class="h3">{{ uni.name }}</h1>
+        <p class="text-muted">{{ uni.city }}</p>
+        <p>{{ uni.description }}</p>
+
+        <h2 class="h5 mt-4">Admission Requirements</h2>
+        <ul class="list-group list-group-flush">
+            {% for req in uni.requirements %}
+            <li class="list-group-item">{{ req }}</li>
+            {% endfor %}
+        </ul>
+
+        {% if uni.programs %}
+        <h2 class="h6 mt-4">Programs</h2>
+        <div>
+            {% for p in uni.programs %}
+            <a class="badge text-bg-light border me-1 mb-1" href="/universities?city={{ uni.city | urlencode }}&program={{ p | urlencode }}">{{ p }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="mt-4 d-flex gap-2">
+            <a href="javascript:history.back()" class="btn btn-outline-secondary">Back</a>
+            <a href="/universities?city={{ uni.city | urlencode }}" class="btn btn-primary">More in {{ uni.city }}</a>
+            <button class="btn btn-danger" onclick="MyUni.toggleFavorite('{{ uni.slug }}')" data-fav-btn data-slug="{{ uni.slug }}">♡ Save</button>
+        </div>
+
+        <div class="card mt-4">
+          <div class="card-body">
+            <h2 class="h6">Save your list</h2>
+            <p class="text-muted small">Enter your details to save favorites so you can access them later.</p>
+            <form onsubmit="event.preventDefault(); (async ()=>{ const name=this.name.value; const email=this.email.value; const note=this.note.value; try { const r=await MyUni.saveList(name,email,note); alert('Saved '+r.saved+' favorite(s).'); } catch(e){ alert('Failed to save.'); } }).call(this)" class="row g-2">
+              <div class="col-12 col-md-6"><input required name="name" class="form-control" placeholder="Name"></div>
+              <div class="col-12 col-md-6"><input required name="email" type="email" class="form-control" placeholder="Email"></div>
+              <div class="col-12"><input name="note" class="form-control" placeholder="Note (optional)"></div>
+              <div class="col-12"><button class="btn btn-success">Save My List</button></div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

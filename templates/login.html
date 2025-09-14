@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Login - MyUni{% endblock %}
+{% block content %}
+<div class="container mt-4" style="max-width: 520px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="h4 mb-3">Login</h1>
+      <form method="post" action="/login" class="row g-3">
+        <div class="col-12">
+          <label class="form-label">Email</label>
+          <input required type="email" name="email" class="form-control" placeholder="you@example.com" />
+        </div>
+        <div class="col-12">
+          <label class="form-label">Password</label>
+          <input required type="password" name="password" class="form-control" placeholder="Password" />
+        </div>
+        <div class="col-12 d-grid">
+          <button class="btn btn-primary">Login</button>
+        </div>
+        <div class="col-12">
+          <p class="small mb-0">No account? <a href="/signup">Sign up</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <p class="text-muted small mt-2">Tip: You can still use Favorites without logging in, but logging in saves them to your account.</p>
+  </div>
+{% endblock %}

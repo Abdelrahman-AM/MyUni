@@ -1,6 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
     line-height: 1.6;
 }
 
@@ -8,11 +7,55 @@ h1 {
     color: #333;
 }
 
-a {
-    color: #0066cc;
-    text-decoration: none;
-}
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-a:hover {
-    text-decoration: underline;
+/* Cards & layout tweaks */
+.uni-card { transition: transform 120ms ease, box-shadow 120ms ease; }
+.uni-card:hover { transform: translateY(-2px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); }
+.card-img-top { object-fit: contain; height: 180px; background: #fff; }
+.navbar .badge { font-weight: 600; }
+
+/* Image fallback: if local image missing, default svg kicks in via HTML onerror */
+img.card-img-top[onerror] { background: #f8f9fa url('/static/images/default.svg') center/cover no-repeat; }
+
+/* Forms and chips */
+.form-control, .form-select, .btn { border-radius: 10px; }
+.pagination .page-link { border-radius: 8px; }
+.btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); border: none; }
+.btn-primary:hover { filter: brightness(0.95); }
+.btn-outline-danger { border-width: 2px; }
+
+/* Reveal-on-scroll animations */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 500ms ease, transform 600ms cubic-bezier(.2,.7,.2,1); }
+.reveal.in-view { opacity: 1; transform: none; }
+.reveal-up { transform: translateY(24px); }
+.reveal-left { transform: translateX(-24px); }
+.reveal-right { transform: translateX(24px); }
+[data-reveal-delay="100"] { transition-delay: 100ms; }
+[data-reveal-delay="200"] { transition-delay: 200ms; }
+[data-reveal-delay="300"] { transition-delay: 300ms; }
+[data-reveal-delay="400"] { transition-delay: 400ms; }
+[data-reveal-delay="500"] { transition-delay: 500ms; }
+
+/* Section spacing */
+.section { padding: 56px 0; }
+.section-alt { padding: 56px 0; background: #ffffff; border-radius: 16px; }
+.feature-card { border: 1px solid rgba(0,0,0,.06); border-radius: 16px; }
+.feature-icon { width: 40px; height: 40px; display:inline-grid; place-items:center; border-radius: 10px; background: #eef2ff; color:#4e73df; }
+
+/* Emirate tiles */
+.emirate-tile {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  color: #4b2aad; /* violet text */
+  background: #f1edff; /* soft violet */
+  border: 1px solid #e6e1ff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition: transform 120ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
+.emirate-tile:hover { text-decoration: none; transform: translateY(-2px); box-shadow: 0 .35rem .9rem rgba(124,58,237,.15); }
+.emirate-tile:active { transform: translateY(0); }

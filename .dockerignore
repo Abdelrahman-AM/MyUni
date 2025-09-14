@@ -1,0 +1,15 @@
+.venv
+__pycache__
+.pytest_cache
+.mypy_cache
+.DS_Store
+.git
+.gitignore
+node_modules
+static/images/*.jpg
+static/images/*.png
+static/images/*.webp
+static/images/*.svg
+data/sessions.json
+data/users.json
+data/submissions.jsonl
